@@ -6,4 +6,9 @@ public class WildCard extends AbstractWildCard {
     public void process() {
         // No process needed
     }
+
+    @Override
+    public String toString() {
+        return "WILD CARD";
+    }
 }

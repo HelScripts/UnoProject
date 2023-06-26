@@ -13,4 +13,8 @@ public class DrawFourCard extends AbstractWildCard {
         }
     }
 
+    @Override
+    public String toString() {
+        return "DRAW FOUR";
+    }
 }

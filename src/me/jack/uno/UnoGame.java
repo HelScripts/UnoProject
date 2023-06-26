@@ -12,40 +12,13 @@ import me.jack.uno.cards.types.ActionableCard;
 import me.jack.uno.cards.types.ColoredCard;
 import me.jack.uno.cards.special.AbstractSpecialCard;
 import me.jack.uno.data.CardColor;
-import me.jack.uno.data.CardNumber;
+import me.jack.uno.data.CardType;
 import me.jack.uno.players.Player;
 import me.jack.uno.players.PlayerList;
 
 public class UnoGame {
 
-    private static final CardPile deck = new CardPile() {{
-        // Setup deck
-        for(int i = 0; i < 5; i++){
-            //setup colored cards
-            if(i < 4){
-                CardColor color = CardColor.values()[i];
-                for(int j = 0; j < 10; j++){
-                    deck.add(new StandardCard(CardNumber.get(j), color));
-                }
-
-                for(int j = 1; j < 10; j++){
-                    deck.add(new StandardCard(CardNumber.get(j), color));
-                }
-
-                for(int j = 0; j < 2; j++){
-                    deck.add(new SkipCard(color));
-                    deck.add(new ReverseCard(color));
-                    deck.add(new DrawTwoCard(color));
-                }
-            }else{
-                //setup wild cards
-                for(int j = 0; j < 4; j++){
-                    deck.add(new DrawFourCard());
-                    deck.add(new WildCard());
-                }
-            }
-        }
-    }};
+    public static final CardPile deck = new CardPile();
     private static final CardPile pile = new CardPile();
 
     private static CardColor lastColor;
@@ -55,7 +28,16 @@ public class UnoGame {
     }
 
     public static AbstractCard drawFromDeck(){
-        AbstractCard drawn = deck.draw();
+        AbstractCard drawn;
+
+        //Prevent playing special card as first card
+        if(pile.getSize() == 0){
+            do {
+                drawn = deck.draw();
+            }while((drawn instanceof AbstractSpecialCard));
+        }else{
+            drawn = deck.draw();
+        }
 
         if(deck.getSize() == 0){
             AbstractCard topCard = pile.draw();
@@ -94,9 +76,41 @@ public class UnoGame {
             if(player.isAI()){
                 actionableCard.processAI();
             } else {
+                System.out.println("Actionable card detected!");
                 actionableCard.processPlayer();
             }
         }
+    }
+
+    public static void reset(){
+        deck.clear();
+        for(int i = 0; i < 5; i++){
+            //setup colored cards
+            if(i < 4){
+                CardColor color = CardColor.values()[i];
+                for(int j = 0; j < 10; j++){
+                    deck.add(new StandardCard(CardType.get(j), color));
+                }
+
+                for(int j = 1; j < 10; j++){
+                    deck.add(new StandardCard(CardType.get(j), color));
+                }
+
+                for(int j = 0; j < 2; j++){
+                    deck.add(new SkipCard(color));
+                    deck.add(new ReverseCard(color));
+                    deck.add(new DrawTwoCard(color));
+                }
+            }else{
+                //setup wild cards
+                for(int j = 0; j < 4; j++){
+                    deck.add(new DrawFourCard());
+                    deck.add(new WildCard());
+                }
+            }
+        }
+
+        deck.shuffle();
     }
 
     public static Player getCurrentPlayer(){

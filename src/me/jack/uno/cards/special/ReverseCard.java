@@ -2,10 +2,12 @@ package me.jack.uno.cards.special;
 
 import me.jack.uno.UnoGame;
 import me.jack.uno.cards.types.ColoredCard;
+import me.jack.uno.cards.types.TypedCard;
 import me.jack.uno.data.CardColor;
+import me.jack.uno.data.CardType;
 import me.jack.uno.players.PlayerList;
 
-public class ReverseCard extends AbstractSpecialCard implements ColoredCard {
+public class ReverseCard extends AbstractSpecialCard implements ColoredCard, TypedCard {
 
     private final CardColor color;
 
@@ -24,7 +26,17 @@ public class ReverseCard extends AbstractSpecialCard implements ColoredCard {
     }
 
     @Override
+    public String toString() {
+        return color + " REVERSE";
+    }
+
+    @Override
     public CardColor getColor() {
         return color;
+    }
+
+    @Override
+    public CardType getType() {
+        return CardType.REVERSE;
     }
 }

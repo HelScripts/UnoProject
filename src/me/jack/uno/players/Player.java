@@ -13,8 +13,26 @@ public class Player {
 
     private final ArrayList<AbstractCard> cards = new ArrayList<>();
 
-    public Player(boolean ai){
+    private final String name;
+
+    private static final String[] botNames = {
+            "BOT Stephen",
+            "BOT Wolf",
+            "BOT Heartbeat",
+            "BOT Russ",
+            "BOT King",
+            "BOT Energy",
+            "BOT Zombie",
+            "BOT Light"
+    };
+
+    public Player(){
+        this.ai = false;
+        this.name = "You";
+    }
+    public Player(boolean ai, int id){
         this.ai = ai;
+        this.name = botNames[id];
     }
 
     public void setNext(Player next){
@@ -41,7 +59,16 @@ public class Player {
         cards.add(card);
     }
 
+    public void removeCard(AbstractCard card){
+        cards.remove(card);
+    }
+
     public ArrayList<AbstractCard> getCards(){
         return cards;
+    }
+
+    @Override
+    public String toString(){
+        return name;
     }
 }

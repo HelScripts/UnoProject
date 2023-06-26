@@ -9,20 +9,23 @@ public class PlayerList {
         return currentPlayer;
     }
 
-    public static boolean addPlayers(Player... players) {
+    public static boolean addPlayers(int playerCount) {
 
-        currentPlayer = null;
-        if(players.length < 2) return false;
+        if(playerCount < 1 || playerCount > 8) return false;
 
-        Player lastPlayer = null;
+        Player[] players = new Player[playerCount];
+        currentPlayer = new Player();
+
+        for(int i = 0; i < playerCount; i++){
+            players[i] = new Player(true, i);
+        }
+
+        Player lastPlayer = currentPlayer;
+
         for(Player player : players){
-            if(lastPlayer == null){
-                currentPlayer = player;
-            }else{
-                lastPlayer.setNext(player);
-                player.setPrevious(lastPlayer);
-            }
-            lastPlayer = currentPlayer;
+            lastPlayer.setNext(player);
+            player.setPrevious(lastPlayer);
+            lastPlayer = player;
         }
 
         currentPlayer.setPrevious(lastPlayer);
@@ -31,12 +34,16 @@ public class PlayerList {
         return true;
     }
 
-    public static void nextPlayer(){
+    public static void processNextPlayer(){
         if(reversed){
-            currentPlayer = currentPlayer.getNext();
-        }else{
             currentPlayer = currentPlayer.getPrevious();
+        }else{
+            currentPlayer = currentPlayer.getNext();
         }
+    }
+
+    public static Player nextPlayer(){
+        return reversed ? currentPlayer.getPrevious() : currentPlayer.getNext();
     }
 
     public static void reverse(){

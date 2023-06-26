@@ -1,6 +1,6 @@
 package me.jack.uno.data;
 
-public enum CardNumber {
+public enum CardType {
 
     ZERO(0),
     ONE(1),
@@ -11,16 +11,19 @@ public enum CardNumber {
     SIX(6),
     SEVEN(7),
     EIGHT(8),
-    NINE(9);
+    NINE(9),
+    REVERSE(10),
+    SKIP(11),
+    DRAW_TWO(12);
 
     private final int value;
 
-    CardNumber(int value){
+    CardType(int value){
        this.value = value;
     }
 
-    public static CardNumber get(int value){
-        for(CardNumber cardNumber : values()){
+    public static CardType get(int value){
+        for(CardType cardNumber : values()){
             if(cardNumber.value == value) return cardNumber;
         }
         return null;

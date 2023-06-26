@@ -9,4 +9,6 @@ public abstract class AbstractCard {
         UnoGame.playCard(this);
     }
 
+    public abstract String toString();
+
 }
