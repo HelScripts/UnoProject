@@ -25,7 +25,7 @@ public abstract class AbstractWildCard extends AbstractSpecialCard implements Ac
     @Override
     public abstract void process();
 
-    public void processPlayer(){
+    public void processPlayer() {
         int selection;
         do {
             System.out.println("What color would you like to choose?");
@@ -42,7 +42,7 @@ public abstract class AbstractWildCard extends AbstractSpecialCard implements Ac
 
         UnoGame.setColor(CardColor.values()[selection]);
     }
-    public void processAI(){
+    public void processAI() {
         Player player = PlayerList.getCurrentPlayer();
 
         CardColor highest = player.getCards().stream()
@@ -55,7 +55,7 @@ public abstract class AbstractWildCard extends AbstractSpecialCard implements Ac
                 .map(Map.Entry::getKey)
                 .orElse(null);
 
-        if(highest == null){
+        if(highest == null) {
             UnoGame.setColor(CardColor.values()[random.nextInt(CardColor.values().length)]);
         }else{
             // Set as most common card color we have

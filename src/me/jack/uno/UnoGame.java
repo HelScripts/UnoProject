@@ -23,23 +23,24 @@ public class UnoGame {
 
     private static CardColor lastColor;
 
-    public static AbstractCard getLastPlayed(){
+    public static AbstractCard getLastPlayed() {
         return pile.getTop();
     }
 
-    public static AbstractCard drawFromDeck(){
+    public static AbstractCard drawFromDeck() {
         AbstractCard drawn;
 
         //Prevent playing special card as first card
-        if(pile.getSize() == 0){
+        if(pile.getSize() == 0) {
             do {
                 drawn = deck.draw();
             }while((drawn instanceof AbstractSpecialCard));
-        }else{
+        }else {
             drawn = deck.draw();
         }
 
-        if(deck.getSize() == 0){
+        //Shuffle pile cards and add to deck when deck is empty
+        if(deck.getSize() == 0) {
             AbstractCard topCard = pile.draw();
             deck.addAll(pile.getCards());
             deck.shuffle();
@@ -51,15 +52,15 @@ public class UnoGame {
         return drawn;
     }
 
-    public static CardColor getColor(){
+    public static CardColor getColor() {
         return lastColor;
     }
 
-    public static void setColor(CardColor color){
+    public static void setColor(CardColor color) {
         lastColor = color;
     }
 
-    public static void playCard(AbstractCard card){
+    public static void playCard(AbstractCard card) {
 
         pile.add(card);
 
@@ -82,28 +83,29 @@ public class UnoGame {
         }
     }
 
-    public static void reset(){
+    public static void reset() {
         deck.clear();
-        for(int i = 0; i < 5; i++){
+        pile.clear();
+        for(int i = 0; i < 5; i++) {
             //setup colored cards
-            if(i < 4){
+            if(i < 4) {
                 CardColor color = CardColor.values()[i];
-                for(int j = 0; j < 10; j++){
+                for(int j = 0; j < 10; j++) {
                     deck.add(new StandardCard(CardType.get(j), color));
                 }
 
-                for(int j = 1; j < 10; j++){
+                for(int j = 1; j < 10; j++) {
                     deck.add(new StandardCard(CardType.get(j), color));
                 }
 
-                for(int j = 0; j < 2; j++){
+                for(int j = 0; j < 2; j++) {
                     deck.add(new SkipCard(color));
                     deck.add(new ReverseCard(color));
                     deck.add(new DrawTwoCard(color));
                 }
-            }else{
+            }else {
                 //setup wild cards
-                for(int j = 0; j < 4; j++){
+                for(int j = 0; j < 4; j++) {
                     deck.add(new DrawFourCard());
                     deck.add(new WildCard());
                 }
@@ -113,7 +115,7 @@ public class UnoGame {
         deck.shuffle();
     }
 
-    public static Player getCurrentPlayer(){
+    public static Player getCurrentPlayer() {
         return PlayerList.getCurrentPlayer();
     }
 }

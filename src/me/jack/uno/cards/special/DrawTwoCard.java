@@ -12,7 +12,7 @@ public class DrawTwoCard extends AbstractSpecialCard implements ColoredCard, Typ
 
     private final CardColor color;
 
-    public DrawTwoCard(CardColor color){
+    public DrawTwoCard(CardColor color) {
         this.color = color;
     }
 
@@ -29,7 +29,7 @@ public class DrawTwoCard extends AbstractSpecialCard implements ColoredCard, Typ
     @Override
     public void process() {
         Player player = PlayerList.nextPlayer();
-        for(int i = 0; i < 2; i++){
+        for(int i = 0; i < 2; i++) {
             player.addCard(UnoGame.drawFromDeck());
         }
     }

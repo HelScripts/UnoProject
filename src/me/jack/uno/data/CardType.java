@@ -18,11 +18,11 @@ public enum CardType {
 
     private final int value;
 
-    CardType(int value){
+    CardType(int value) {
        this.value = value;
     }
 
-    public static CardType get(int value){
+    public static CardType get(int value) {
         for(CardType cardNumber : values()){
             if(cardNumber.value == value) return cardNumber;
         }

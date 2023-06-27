@@ -11,7 +11,7 @@ public class ReverseCard extends AbstractSpecialCard implements ColoredCard, Typ
 
     private final CardColor color;
 
-    public ReverseCard(CardColor color){
+    public ReverseCard(CardColor color) {
         this.color = color;
     }
 

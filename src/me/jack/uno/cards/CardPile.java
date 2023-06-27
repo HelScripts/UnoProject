@@ -8,35 +8,35 @@ public class CardPile {
 
     Stack<AbstractCard> pile = new Stack<>();
 
-    public AbstractCard getTop(){
+    public AbstractCard getTop() {
         return pile.peek();
     }
 
-    public void shuffle(){
+    public void shuffle() {
         Collections.shuffle(pile);
     }
 
-    public void add(AbstractCard card){
+    public void add(AbstractCard card) {
         pile.push(card);
     }
 
-    public AbstractCard draw(){
+    public AbstractCard draw() {
         return pile.pop();
     }
 
-    public int getSize(){
+    public int getSize() {
         return pile.size();
     }
 
-    public void addAll(AbstractCard... cards){
+    public void addAll(AbstractCard... cards) {
         pile.addAll(List.of(cards));
     }
 
-    public AbstractCard[] getCards(){
+    public AbstractCard[] getCards() {
         return pile.toArray(new AbstractCard[0]);
     }
 
-    public void clear(){
+    public void clear() {
         pile.clear();
     }
 }

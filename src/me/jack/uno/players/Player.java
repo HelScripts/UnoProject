@@ -26,49 +26,49 @@ public class Player {
             "BOT Light"
     };
 
-    public Player(){
+    public Player() {
         this.ai = false;
         this.name = "You";
     }
-    public Player(boolean ai, int id){
+    public Player(boolean ai, int id) {
         this.ai = ai;
         this.name = botNames[id];
     }
 
-    public void setNext(Player next){
+    public void setNext(Player next) {
         this.next = next;
     }
 
-    public Player getNext(){
+    public Player getNext() {
         return next;
     }
 
-    public void setPrevious(Player previous){
+    public void setPrevious(Player previous) {
         this.previous = previous;
     }
 
-    public Player getPrevious(){
+    public Player getPrevious() {
         return previous;
     }
 
-    public boolean isAI(){
+    public boolean isAI() {
         return ai;
     }
 
-    public void addCard(AbstractCard card){
+    public void addCard(AbstractCard card) {
         cards.add(card);
     }
 
-    public void removeCard(AbstractCard card){
+    public void removeCard(AbstractCard card) {
         cards.remove(card);
     }
 
-    public ArrayList<AbstractCard> getCards(){
+    public ArrayList<AbstractCard> getCards() {
         return cards;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return name;
     }
 }

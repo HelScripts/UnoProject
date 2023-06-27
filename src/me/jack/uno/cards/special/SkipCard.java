@@ -11,7 +11,7 @@ public class SkipCard extends AbstractSpecialCard implements ColoredCard, TypedC
 
     private final CardColor color;
 
-    public SkipCard(CardColor color){
+    public SkipCard(CardColor color) {
         this.color = color;
     }
 
